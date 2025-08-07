@@ -31,19 +31,19 @@ pipeline {
             }
         }
         stage('Terraform apply') {
-            timeout(2) {
-                input message: '¿Aprueba el deployment?', ok: 'SI'
-            }
             steps {
+                timeout(time: 2) {
+                    input message: '¿Aprueba el deployment?', ok: 'SI'
+                }
                 sh '''
-            	export AWS_ACCESS_KEY_ID=$CREDENCIALES_AWS_USR
-                export AWS_SECRET_ACCESS_KEY=$CREDENCIALES_AWS_PSW
-            
-            	terraform apply -auto-approve
-
-            	unset AWS_ACCESS_KEY_ID
+                export AWS_ACCESS_KEY_ID=$AWS_ACCESS_USR
+                export AWS_SECRET_ACCESS_KEY=$AWS_ACCESS_PSW
+                
+                terraform apply -auto-approve
+                
+                unset AWS_ACCESS_KEY_ID
                 unset AWS_SECRET_ACCESS_KEY
-             '''
+                '''
             }
         }
     }
