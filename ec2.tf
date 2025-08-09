@@ -10,9 +10,10 @@ resource "aws_instance" "instancia" {
   vpc_security_group_ids      = [aws_security_group.ssh.id]
 
   tags = {
-  ambiente = "dev"
-  cloud = "AWS"
-  region = "us-east-1"
+    Name     = "lab-educacionIT-dev"
+    ambiente = "dev"
+    cloud    = "AWS"
+    region   = "us-east-1"
   }
 
   user_data = <<-EOL
